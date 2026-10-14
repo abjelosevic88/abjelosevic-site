@@ -1,0 +1,12 @@
+// Cloudflare Workers static-assets deployment. `npx wrangler deploy` uploads
+// dist/ after `pnpm build`; _headers and _redirects inside dist/ are honoured.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "abjelosevic-site",
+  "compatibility_date": "2026-10-14",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

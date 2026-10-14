@@ -35,18 +35,17 @@ pnpm deploy     # astro build && rsync dist/ -> /var/www/cv/
 
 The `*.lab.bjelke.org` wildcard already points at the box's Tailscale address, so the name only works from tailnet devices.
 
-### Public site (abjelosevic.com, Cloudflare Pages)
+### Public site (abjelosevic.com, Cloudflare Workers)
 
-Cloudflare Pages builds from this repository on every push to `main`:
+Cloudflare builds and deploys from this repository on every push to `main`, as a Worker serving static assets (`wrangler.jsonc`):
 
 | Setting | Value |
 |---|---|
-| Framework preset | Astro |
 | Build command | `pnpm build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 | Environment variable | `NODE_VERSION=22` |
 
-`public/_headers` sets caching and security headers; `public/_redirects` sends `www.` to the apex. `404.html` is served automatically.
+`public/_headers` sets caching and security headers; `public/_redirects` sends `www.` to the apex; `404.html` is served for unknown paths.
 
 ## SEO and assets
 
