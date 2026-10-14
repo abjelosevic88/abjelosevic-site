@@ -1,5 +1,7 @@
-# Cloudflare Pages headers. Astro fingerprints everything under /_astro/, so it
-# can be cached forever; HTML is revalidated on every visit.
+# Cloudflare Workers static-asset headers. Astro fingerprints everything under
+# /_astro/, so it can be cached forever; HTML is revalidated on every visit.
+# Rules are additive — later blocks must detach (`! Name`) a header before
+# setting their own value, or both values are sent.
 
 /*
   X-Content-Type-Options: nosniff
@@ -11,15 +13,19 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /_astro/*
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 /og.png
+  ! Cache-Control
   Cache-Control: public, max-age=86400
+
+/favicon.svg
+  ! Cache-Control
+  Cache-Control: public, max-age=604800
 
 # The PDF carries contact details the page itself leaves out; keep it out of search results.
 /cv/*
   X-Robots-Tag: noindex
+  ! Cache-Control
   Cache-Control: public, max-age=3600
-
-/favicon.svg
-  Cache-Control: public, max-age=604800
