@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import { profile, pocketHomelab } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Set on pages that must not be indexed (404). */
+  noindex?: boolean;
+}
+
+const {
+  title = `${profile.name} — ${profile.title}`,
+  description = profile.description,
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(profile.url);
+const canonical = new URL(Astro.url.pathname, site);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = new URL(`${base}/og.png`, site);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${site.href}#website`,
+    url: site.href,
+    name: profile.name,
+    description,
+    inLanguage: 'en',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${site.href}#person`,
+    name: profile.name,
+    givenName: 'Aleksandar',
+    familyName: 'Bjelošević',
+    jobTitle: 'Senior Software Engineer · Technology Lead',
+    description: profile.tagline,
+    email: `mailto:${profile.email}`,
+    url: site.href,
+    image: ogImage.href,
+    address: { '@type': 'PostalAddress', addressLocality: 'Banja Luka', addressCountry: 'BA' },
+    sameAs: [profile.github, pocketHomelab.url],
+    knowsAbout: ['Large language models', 'Retrieval augmented generation', 'Go', 'React', 'Node.js', 'TypeScript', 'Self-hosting', 'Docker', 'NixOS'],
+    knowsLanguage: profile.languages.map((l) => l.name),
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Faculty of Electrical Engineering, Banja Luka' },
+    worksFor: { '@type': 'Organization', name: 'Pocket Homelab', url: pocketHomelab.url },
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    {noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    <link rel="canonical" href={canonical.href} />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}/favicon-32.png`} type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}/site.webmanifest`} />
+    <meta name="theme-color" content="#0a0e0a" />
+    <meta name="color-scheme" content="dark light" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name} — ${profile.title}`} />
+    <meta property="profile:first_name" content="Aleksandar" />
+    <meta property="profile:last_name" content="Bjelošević" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Dark is the default; apply a saved light preference before first paint. -->
+    <script is:inline>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+
+    <script>
+      // Scroll reveal
+      const items = document.querySelectorAll<HTMLElement>('.reveal');
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

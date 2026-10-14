@@ -1,0 +1,167 @@
+---
+import { experience } from '../data/site';
+---
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Experience</span>
+      <h2 id="experience-title">Thirteen years, four stacks</h2>
+      <p>From PHP and embedded C++ to Node.js products, then React and Go platforms and now LLM systems.</p>
+    </div>
+
+    <ol class="timeline">
+      {
+        experience.map((job) => (
+          <li class="job reveal">
+            <div class="job__marker" aria-hidden="true" />
+            <div class="job__head">
+              <h3>{job.role}</h3>
+              <span class="job__period">{job.period}</span>
+            </div>
+            <div class="tags job__stack">
+              {job.stack.map((s) => (
+                <span class="chip chip--accent">{s}</span>
+              ))}
+            </div>
+            <div class="job__tracks">
+              {job.tracks.map((t) => (
+                <div class="track">
+                  <h4>{t.heading}</h4>
+                  <ul>
+                    {t.bullets.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 2.25rem;
+    padding-left: 1.75rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--border) 60%, transparent);
+  }
+
+  .job {
+    position: relative;
+  }
+
+  .job__marker {
+    position: absolute;
+    left: calc(-1.75rem + 1px);
+    top: 0.45rem;
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+
+  .job:first-child .job__marker {
+    background: var(--accent);
+  }
+
+  .job__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 1.25rem;
+  }
+
+  .job__head h3 {
+    font-size: 1.15rem;
+  }
+
+  .job__period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .job__stack {
+    margin-top: 0.75rem;
+    padding-top: 0;
+  }
+
+  .job__tracks {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.1rem;
+  }
+
+  .track {
+    padding: 1.1rem 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+
+  .track h4 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.7rem;
+  }
+
+  .track h4::before {
+    content: '## ' / '';
+  }
+
+  .track ul {
+    display: grid;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+  }
+
+  .track li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .track li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+  }
+
+  @media (min-width: 820px) {
+    .timeline {
+      padding-left: 2.5rem;
+    }
+
+    .job__marker {
+      left: calc(-2.5rem + 1px);
+    }
+
+    .job__tracks {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+</style>

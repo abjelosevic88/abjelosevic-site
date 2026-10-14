@@ -1,0 +1,300 @@
+---
+import Icons from './Icons.astro';
+import { pocketHomelab, pocketApps, raycast, sharedTraits, otherRepos } from '../data/site';
+---
+
+<section class="section" id="homelab" aria-labelledby="homelab-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Side project turned product</span>
+      <h2 id="homelab-title">Pocket Homelab</h2>
+      <p>
+        A native app for people who run their own servers, plus a family of self-hosted tools that plug into it. Everything
+        talks directly to your services over your own network.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <div class="feature__body">
+        <p class="feature__tagline">{pocketHomelab.tagline}</p>
+        <h3>{pocketHomelab.name} for iOS and macOS</h3>
+        <p class="feature__summary">{pocketHomelab.summary}</p>
+        <ul class="feature__list">
+          {pocketHomelab.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+        <div class="feature__footer">
+          <div class="tags">
+            {pocketHomelab.platforms.map((p) => <span class="chip chip--accent">{p}</span>)}
+          </div>
+          <a class="btn btn--primary" href={pocketHomelab.url} target="_blank" rel="noopener">
+            pockethomelab.com
+            <Icons name="external" />
+          </a>
+        </div>
+      </div>
+      <div class="feature__aside">
+        <p class="feature__aside-title">What every Pocket app ships with</p>
+        <ul>
+          {sharedTraits.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-head reveal">The self-hosted suite</h3>
+    <p class="sub-lede reveal">
+      One Go binary, one SQLite file, one volume each. MIT licensed, with companion views in the app.
+    </p>
+
+    <div class="grid grid--3">
+      {
+        pocketApps.map((p) => (
+          <a class="card reveal" href={p.url} target="_blank" rel="noopener">
+            <div class="card__top">
+              <h3>{p.name}</h3>
+              <span class="card__repo">
+                <Icons name="github" />
+                {p.repo}
+              </span>
+            </div>
+            <p class="card__summary">{p.summary}</p>
+            <p>{p.detail}</p>
+            <div class="tags">
+              {p.tags.map((t) => (
+                <span class="chip">{t}</span>
+              ))}
+            </div>
+          </a>
+        ))
+      }
+
+      <a class="card card--wide reveal" href={raycast.url} target="_blank" rel="noopener">
+        <div class="card__top">
+          <h3>{raycast.name}</h3>
+          <span class="card__repo">
+            <Icons name="github" />
+            {raycast.repo}
+          </span>
+        </div>
+        <p class="card__summary">{raycast.summary}</p>
+        <p>{raycast.detail}</p>
+        <div class="tags">
+          {raycast.tags.map((t) => <span class="chip">{t}</span>)}
+        </div>
+      </a>
+    </div>
+
+    <div class="more reveal">
+      <span class="more__label">Also on GitHub</span>
+      <ul class="more__list">
+        {
+          otherRepos.map((r) => (
+            <li>
+              <a href={r.url} target="_blank" rel="noopener">
+                <code>{r.name}</code>
+                <span>{r.note}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .feature__body,
+  .feature__aside {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+  }
+
+  .feature__body {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elev);
+    box-shadow: var(--shadow);
+  }
+
+  .feature__tagline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 0.6rem;
+  }
+
+  .feature__tagline::before {
+    content: '$ ' / '';
+    color: var(--accent);
+  }
+
+  .feature__body h3 {
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  }
+
+  .feature__summary {
+    margin-top: 0.9rem;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    max-width: 60ch;
+  }
+
+  .feature__list {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1.25rem;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .feature__list li {
+    position: relative;
+    padding-left: 1.35rem;
+  }
+
+  .feature__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+
+  .feature__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .feature__aside {
+    background: var(--bg-soft);
+  }
+
+  .feature__aside-title {
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+
+  .feature__aside ul {
+    display: grid;
+    gap: 0.55rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  .feature__aside li {
+    position: relative;
+    padding-left: 1.3rem;
+  }
+
+  .feature__aside li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  .sub-head {
+    font-size: 1.35rem;
+  }
+
+  .sub-lede {
+    margin: 0.4rem 0 1.4rem;
+    color: var(--text-muted);
+  }
+
+  .card {
+    color: inherit;
+  }
+
+  .card:hover {
+    text-decoration: none;
+  }
+
+  .card__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card__repo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  .card__repo :global(svg) {
+    width: 13px;
+    height: 13px;
+  }
+
+  .card__summary {
+    color: var(--text) !important;
+    font-weight: 500;
+  }
+
+  .card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border);
+  }
+
+  .more__label {
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .more__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .more__list a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .more__list code {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+
+  @media (min-width: 900px) {
+    .feature {
+      grid-template-columns: 1.6fr 1fr;
+    }
+  }
+</style>

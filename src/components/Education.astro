@@ -1,0 +1,63 @@
+---
+import { education, profile } from '../data/site';
+---
+
+<section class="section" id="education" aria-labelledby="education-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Education & languages</span>
+      <h2 id="education-title">Background</h2>
+    </div>
+
+    <div class="grid grid--2">
+      {
+        education.map((e) => (
+          <div class="card reveal">
+            <h3>{e.school}</h3>
+            <p class="degree">{e.degree}</p>
+            {e.note && <p>{e.note}</p>}
+          </div>
+        ))
+      }
+      <div class="card reveal">
+        <h3>Languages</h3>
+        <ul class="langs">
+          {
+            profile.languages.map((l) => (
+              <li>
+                <span>{l.name}</span>
+                <span class="chip">{l.level}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .degree {
+    color: var(--text) !important;
+    font-weight: 500;
+  }
+
+  .langs {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .langs li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .langs li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+</style>

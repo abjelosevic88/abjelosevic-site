@@ -1,0 +1,82 @@
+---
+import { skills } from '../data/site';
+---
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Skills</span>
+      <h2 id="skills-title">What I work with</h2>
+      <p>The AI and Go rows are where most of my time goes now; the rest is a decade of production use.</p>
+    </div>
+
+    <div class="skills">
+      {
+        skills.map((g) => (
+          <div class="skills__row reveal">
+            <h3>{g.group}</h3>
+            <ul>
+              {g.items.map((s) => (
+                <li class="chip">{s}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    display: grid;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elev);
+    overflow: hidden;
+  }
+
+  .skills__row {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.15rem 1.35rem;
+  }
+
+  .skills__row + .skills__row {
+    border-top: 1px solid var(--border);
+  }
+
+  .skills__row h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .skills__row h3::before {
+    content: '## ' / '';
+  }
+
+  .skills__row ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .skills__row:first-child .chip {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (min-width: 760px) {
+    .skills__row {
+      grid-template-columns: 220px 1fr;
+      align-items: start;
+    }
+
+    .skills__row h3 {
+      padding-top: 0.35rem;
+    }
+  }
+</style>

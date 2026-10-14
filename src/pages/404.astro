@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Icons from '../components/Icons.astro';
+import { profile } from '../data/site';
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title={`404 — ${profile.name}`} description="That page does not exist." noindex>
+  <Header />
+  <main id="main" class="container nf">
+    <p class="eyebrow">exit code 404</p>
+    <h1>No such file or directory<span aria-hidden="true">_</span></h1>
+    <p class="nf__text">The address you followed points at nothing on this site. Everything lives on the one page.</p>
+    <a class="btn btn--primary" href={base}>
+      <Icons name="arrow" />
+      Back to the start
+    </a>
+  </main>
+</Base>
+
+<style>
+  .nf {
+    min-height: 70vh;
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    padding-block: 4rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .nf__text {
+    color: var(--text-muted);
+    max-width: 50ch;
+  }
+
+  .btn {
+    width: max-content;
+  }
+</style>
