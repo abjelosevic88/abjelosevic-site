@@ -45,7 +45,7 @@ Cloudflare builds and deploys from this repository on every push to `main`, as a
 | Deploy command | `npx wrangler deploy` |
 | Environment variable | `NODE_VERSION=22` |
 
-`public/_headers` sets caching and security headers; `public/_redirects` sends `www.` to the apex; `404.html` is served for unknown paths.
+`public/_headers` sets caching and security headers; `404.html` is served for unknown paths. The `www.` → apex redirect is a Cloudflare Redirect Rule on the zone (Workers assets do not allow host-based rules in `_redirects`).
 
 ## SEO and assets
 
