@@ -22,7 +22,7 @@ export const profile = {
 export const stats = [
   { value: '13+', label: 'years shipping software' },
   { value: '43', label: 'services in Pocket Homelab' },
-  { value: '6', label: 'self-hosted Pocket apps' },
+  { value: '8', label: 'self-hosted Pocket apps' },
   { value: 'Go · React · AI', label: 'current stack' },
 ];
 
@@ -175,6 +175,24 @@ export const pocketHomelab = {
 
 // Self-hosted companions to the app. All: one Go binary, one SQLite file, one volume, MIT.
 export const pocketApps: Project[] = [
+  {
+    name: 'Pocket Travel',
+    repo: 'pocket-homelab-travel',
+    url: 'https://github.com/abjelosevic88/pocket-homelab-travel',
+    summary: 'A trip planner that keeps the plan, the cost, the route and the photos on one page.',
+    detail:
+      'A drag-and-drop itinerary with daily weather, stays and transport legs, budget vs spent synced from Firefly III by tag in any currency, the route and stops recorded by Dawarich, geotagged Immich photos on the map, checklists, a shared journal and an iCalendar feed. Optional AI suggests places, plans the days and writes the recap.',
+    tags: ['Go', 'SQLite', 'Firefly III', 'Dawarich', 'Immich', 'OpenStreetMap', 'PWA'],
+  },
+  {
+    name: 'Pocket Clips',
+    repo: 'pocket-homelab-clips',
+    url: 'https://github.com/abjelosevic88/pocket-homelab-clips',
+    summary: 'Clipboard history, snippets and quicklinks the way Raycast does them, on your own server.',
+    detail:
+      'Every copy from every device in one deduplicated list (text, links, colours, images), found with SQLite FTS5. Snippets use Raycast’s placeholder syntax and expand on the server, quicklinks take a query and double as browser search engines via /go/<keyword>, and JSON import/export round-trips with Raycast.',
+    tags: ['Go', 'SQLite', 'FTS5', 'Raycast', 'PWA'],
+  },
   {
     name: 'Pocket Subtitles',
     repo: 'pocket-homelab-subtitles',
