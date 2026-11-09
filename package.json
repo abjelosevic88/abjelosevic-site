@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "astro build && rsync -a --delete dist/ /var/www/cv/",
-    "assets": "node scripts/assets.mjs"
+    "assets": "node scripts/assets.mjs",
+    "sync:pocket": "node scripts/sync-pocket.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -1,3 +1,5 @@
+import pocket from './pocket.json';
+
 export const profile = {
   name: 'Aleksandar Bjelošević',
   shortName: 'Aleksandar',
@@ -5,11 +7,11 @@ export const profile = {
   tagline: 'Full-stack engineer building LLM-based systems, Go services and self-hosted software.',
   // <meta name="description">: one sentence, ~155 characters, with the terms people search for.
   description:
-    'Aleksandar Bjelošević, Senior Software Engineer and Technology Lead in Banja Luka: LLM and RAG systems, Go and React platforms, and Pocket Homelab, a native app and self-hosted tools for homelabs.',
+    'Aleksandar Bjelošević, Senior Software Engineer and Technology Lead in Banja Luka: LLM and RAG systems, Go and React platforms, and Pocket Homelab, a native app and 80+ self-hosted apps for homelabs.',
   url: 'https://abjelosevic.com',
   cv: '/cv/Aleksandar-Bjelosevic-CV.pdf',
   bio:
-    'I have been shipping software since 2013: PHP sites, embedded set-top-box engines, Node.js and React Native products, and lately React and Go platforms. Today I lead AI initiatives, designing RAG pipelines and multi-agent workflows that turn messy business data into decisions, and I build Pocket Homelab, a native app plus a family of single-binary self-hosted tools.',
+    `I have been shipping software since 2013: PHP sites, embedded set-top-box engines, Node.js and React Native products, and lately React and Go platforms. Today I lead AI initiatives, designing RAG pipelines and multi-agent workflows that turn messy business data into decisions, and I build Pocket Homelab: a native iPhone and Mac app, plus ${pocket.apps.length} single-binary self-hosted apps that share one sign-in through Pocket Core.`,
   location: 'Banja Luka, Bosnia and Herzegovina',
   email: 'abjelosevic88@gmail.com',
   github: 'https://github.com/abjelosevic88',
@@ -21,8 +23,8 @@ export const profile = {
 
 export const stats = [
   { value: '13+', label: 'years shipping software' },
-  { value: '43', label: 'services in Pocket Homelab' },
-  { value: '8', label: 'self-hosted Pocket apps' },
+  { value: String(pocket.apps.length), label: 'self-hosted Pocket apps' },
+  { value: String(pocket.serviceCount), label: 'integrations in Pocket Homelab' },
   { value: 'Go · React · AI', label: 'current stack' },
 ];
 
@@ -129,7 +131,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: 'Frontend & mobile',
-    items: ['React', 'Next.js', 'React Native', 'TypeScript', 'GraphQL / Apollo', 'Atomic design', 'PWA'],
+    items: ['React', 'Next.js', 'React Native', 'Swift / SwiftUI', 'TypeScript', 'GraphQL / Apollo', 'Atomic design', 'PWA'],
   },
   {
     group: 'Backend',
@@ -165,87 +167,45 @@ export const pocketHomelab = {
   summary:
     'A native iOS and macOS app that connects directly to self-hosted services: status, downloads, media, photos, notes, code and money in one dashboard. No account, no analytics, no cloud in between.',
   highlights: [
-    '43 integrations: Jellyfin, Immich, Nextcloud, the *arr stack, qBittorrent, Uptime Kuma, Firefly III, Paperless-ngx, TrueNAS, AdGuard Home and more',
+    `${pocket.serviceCount} integrations: Jellyfin, Immich, Nextcloud, the *arr stack, qBittorrent, Uptime Kuma, Paperless-ngx, TrueNAS, AdGuard Home and the Pocket apps themselves`,
+    'Pairs with Pocket Core from one QR code, or straight with each service; no account, no analytics, no developer backend',
     'Credentials stay in the device Keychain; works over Tailscale or any VPN',
     'Offline with queued actions, Home Screen and Lock Screen widgets, Control Center, search across every service',
-    'Universal purchase for iPhone and Mac; free with up to 3 integrations',
+    'Universal purchase for iPhone and Mac; free with up to 3 integrations. TestFlight beta now, App Store soon',
   ],
   platforms: ['iOS 18+', 'macOS 15+', 'Swift'],
 };
 
-// Self-hosted companions to the app. All: one Go binary, one SQLite file, one volume, MIT.
-export const pocketApps: Project[] = [
+// The self-hosted suite, copied from the pockethomelab.com repo by `pnpm sync:pocket`.
+export type PocketApp = (typeof pocket.apps)[number];
+export const pocketSite = 'https://pockethomelab.com';
+export const pocketCategories = pocket.categories
+  .map((c) => ({ ...c, apps: pocket.apps.filter((a) => a.category === c.id) }))
+  .filter((c) => c.apps.length > 0);
+export const pocketAppCount = pocket.apps.length;
+export const nativeApps = pocket.native;
+
+// The pieces that hold the suite together.
+export const ecosystem = [
   {
-    name: 'Pocket Travel',
-    repo: 'pocket-homelab-travel',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-travel',
-    summary: 'A trip planner that keeps the plan, the cost, the route and the photos on one page.',
-    detail:
-      'A drag-and-drop itinerary with daily weather, stays and transport legs, budget vs spent synced from Firefly III by tag in any currency, the route and stops recorded by Dawarich, geotagged Immich photos on the map, checklists, a shared journal and an iCalendar feed. Optional AI suggests places, plans the days and writes the recap.',
-    tags: ['Go', 'SQLite', 'Firefly III', 'Dawarich', 'Immich', 'OpenStreetMap', 'PWA'],
+    name: 'Pocket Core',
+    url: `${pocketSite}/apps/core`,
+    summary: 'The hub. One account per person signs in to every app (OpenID Connect), phones pair from one QR code, and apps act for each other through app links and an event bus.',
   },
   {
-    name: 'Pocket Clips',
-    repo: 'pocket-homelab-clips',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-clips',
-    summary: 'Clipboard history, snippets and quicklinks the way Raycast does them, on your own server.',
-    detail:
-      'Every copy from every device in one deduplicated list (text, links, colours, images), found with SQLite FTS5. Snippets use Raycast’s placeholder syntax and expand on the server, quicklinks take a query and double as browser search engines via /go/<keyword>, and JSON import/export round-trips with Raycast.',
-    tags: ['Go', 'SQLite', 'FTS5', 'Raycast', 'PWA'],
+    name: 'Pocket AI',
+    url: `${pocketSite}/apps/ai`,
+    summary: 'Claude Code and Codex on your own server, from any browser or the iPhone app: approvals, scheduled checks, and an MCP endpoint into every Pocket app.',
   },
   {
-    name: 'Pocket Subtitles',
-    repo: 'pocket-homelab-subtitles',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-subtitles',
-    summary: 'Keeps a media library’s subtitles in sync with the audio.',
-    detail:
-      'Every Bazarr download is measured against the video’s own audio and re-timed only when needed; different cuts are aligned act by act, wrong-episode and machine-translated subtitles are rejected, and a nightly sweep covers the rest. Jellyfin/Emby refresh, nudge by milliseconds, season tools.',
-    tags: ['Go', 'SQLite', 'ffmpeg', 'alass', 'Bazarr', 'PWA'],
+    name: 'Pocket Box',
+    url: `${pocketSite}/box`,
+    summary: 'A NixOS appliance that installs from a USB stick and runs Core plus every app at <app>.pocket.local: HTTPS, Tailscale, LUKS2 with TPM, nightly updates that roll back on failure.',
   },
   {
-    name: 'Pocket Invoicing',
-    repo: 'pocket-homelab-invoicing',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-invoicing',
-    summary: 'Invoicing for a one-person business, packaged as a ~15 MB container.',
-    detail:
-      'Hourly, daily, retainer, fixed and per-unit billing, time tracking, recurring invoices, a month-end wizard, multi-currency with ECB rates, PDF templates including .docx via Gotenberg, client share links, SMTP reminders, Paperless-ngx archiving and a yearly accountant package.',
-    tags: ['Go', 'SQLite', 'PDF', 'SMTP', 'Webhooks', 'REST API'],
-  },
-  {
-    name: 'Pocket Split',
-    repo: 'pocket-homelab-cost-split',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-cost-split',
-    summary: 'Cost splitting for trips, flats and dinners, in any currency.',
-    detail:
-      'A group per pot of money, expenses in any ISO 4217 currency with the day’s rate looked up and stored, splits by share, percentage or exact amount, and settle-up with the fewest transfers. Stats, PDF reports, JSON/CSV export.',
-    tags: ['Go', 'SQLite', 'Frankfurter', 'PWA'],
-  },
-  {
-    name: 'Pocket Bookshelf',
-    repo: 'pocket-homelab-bookshelf',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-bookshelf',
-    summary: 'A private reading log: what you read, what you thought, what’s next.',
-    detail:
-      'Add a book by title or ISBN with details and covers from Open Library and Google Books, half-star ratings, quotes and Kindle highlight import, author pages filled in automatically, a reorderable queue with monthly plans and a yearly goal.',
-    tags: ['Go', 'SQLite', 'Open Library', 'PWA'],
-  },
-  {
-    name: 'Pocket Inventory',
-    repo: 'pocket-homelab-inventory',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-inventory',
-    summary: 'Home inventory for households: what you own, how many, where, whose.',
-    detail:
-      'One-line quick add, plus/minus on every row, alert levels that feed a shopping list by themselves, multi-user ownership and history, barcode lookup, and an API for Homepage widgets, Shortcuts and Home Assistant.',
-    tags: ['Go', 'SQLite', 'REST API', 'PWA'],
-  },
-  {
-    name: 'Pocket Habits',
-    repo: 'pocket-homelab-habit-tracker',
-    url: 'https://github.com/abjelosevic88/pocket-homelab-habit-tracker',
-    summary: 'The one-page bullet-journal habit spread, self-hosted.',
-    detail:
-      'Seven habits on a month grid, sleep score and day rating over highlighter bands, a numeric tracker, one good thing per day. Insights show what moves your scores, weather comes from Open-Meteo, reminders go through ntfy or Apprise.',
-    tags: ['Go', 'SQLite', 'Open-Meteo', 'ntfy', 'PWA'],
+    name: 'Native companions',
+    url: `${pocketSite}/native`,
+    summary: 'Swift apps for things a browser cannot do, talking to the same server APIs.',
   },
 ];
 
@@ -263,13 +223,15 @@ export const sharedTraits = [
   'Single static Go binary with an embedded SPA',
   'SQLite with WAL and VACUUM INTO backups from the UI, CLI or API',
   'Multi-arch images on ghcr.io (amd64 / arm64 / armv7)',
-  'Built-in multi-user login, SSO proxy headers or no-login on a trusted LAN',
+  'One sign-in through Pocket Core, or built-in login, SSO proxy headers or no-login on a trusted LAN',
+  'Apps hand work to each other through Core: app links, events and webhooks',
   'Personal API tokens, Prometheus /metrics, /healthz and /readyz',
   'Installable PWA with a bottom tab bar and dark mode',
   'Companion views inside the Pocket Homelab app',
 ];
 
 export const otherRepos = [
+  { name: 'pocket-homelab-box', url: 'https://github.com/abjelosevic88/pocket-homelab-box', note: 'NixOS appliance that runs every Pocket app' },
   { name: 'nix', url: 'https://github.com/abjelosevic88/nix', note: 'Nix flake running a fleet of machines' },
   { name: 'go-arpg', url: 'https://github.com/abjelosevic88/go-arpg', note: 'An action RPG written in Go' },
   { name: 'fastify-sequelize', url: 'https://github.com/abjelosevic88/fastify-sequelize', note: 'Fastify plugin for Sequelize' },

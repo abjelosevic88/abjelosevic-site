@@ -1,6 +1,16 @@
 ---
 import Icons from './Icons.astro';
-import { pocketHomelab, pocketApps, raycast, sharedTraits, otherRepos } from '../data/site';
+import {
+  pocketHomelab,
+  pocketCategories,
+  pocketAppCount,
+  pocketSite,
+  ecosystem,
+  nativeApps,
+  raycast,
+  sharedTraits,
+  otherRepos,
+} from '../data/site';
 ---
 
 <section class="section" id="homelab" aria-labelledby="homelab-title">
@@ -9,7 +19,7 @@ import { pocketHomelab, pocketApps, raycast, sharedTraits, otherRepos } from '..
       <span class="eyebrow">Side project turned product</span>
       <h2 id="homelab-title">Pocket Homelab</h2>
       <p>
-        A native app for people who run their own servers, plus a family of self-hosted tools that plug into it. Everything
+        A native app for people who run their own servers, plus {pocketAppCount} self-hosted apps behind one sign-in. Everything
         talks directly to your services over your own network.
       </p>
     </div>
@@ -40,33 +50,63 @@ import { pocketHomelab, pocketApps, raycast, sharedTraits, otherRepos } from '..
       </div>
     </div>
 
-    <h3 class="sub-head reveal">The self-hosted suite</h3>
-    <p class="sub-lede reveal">
-      One Go binary, one SQLite file, one volume each. MIT licensed, with companion views in the app.
-    </p>
+    <h3 class="sub-head reveal">The ecosystem</h3>
+    <p class="sub-lede reveal">What ties the apps together, and where they run.</p>
 
-    <div class="grid grid--3">
+    <div class="grid grid--2 eco">
       {
-        pocketApps.map((p) => (
-          <a class="card reveal" href={p.url} target="_blank" rel="noopener">
-            <div class="card__top">
-              <h3>{p.name}</h3>
-              <span class="card__repo">
-                <Icons name="github" />
-                {p.repo}
-              </span>
-            </div>
-            <p class="card__summary">{p.summary}</p>
-            <p>{p.detail}</p>
-            <div class="tags">
-              {p.tags.map((t) => (
-                <span class="chip">{t}</span>
-              ))}
-            </div>
+        ecosystem.map((e) => (
+          <a class="card reveal" href={e.url} target="_blank" rel="noopener">
+            <h3>{e.name}</h3>
+            <p>{e.summary}</p>
+            {e.name === 'Native companions' && (
+              <ul class="native">
+                {nativeApps.map((n) => (
+                  <li>
+                    <strong>{n.name}</strong>
+                    <span class="native__platforms">{n.platforms.join(' · ')}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </a>
         ))
       }
+    </div>
 
+    <h3 class="sub-head reveal" id="pocket-apps">The self-hosted suite: {pocketAppCount} apps</h3>
+    <p class="sub-lede reveal">
+      Open-source replacements for cloud services. One Go binary, one SQLite file, one volume each, MIT licensed, with
+      companion views in the app. <a href={`${pocketSite}/apps`} target="_blank" rel="noopener">Full catalogue on pockethomelab.com</a>.
+    </p>
+
+    <div class="suite">
+      {
+        pocketCategories.map((c, i) => (
+          <details class="cat reveal" open={i === 0}>
+            <summary>
+              <span class="cat__name">{c.name}</span>
+              <span class="cat__count">{c.apps.length}</span>
+              <span class="cat__desc">{c.description}</span>
+            </summary>
+            <ul class="apps">
+              {c.apps.map((a) => (
+                <li>
+                  <a href={`${pocketSite}/apps/${a.slug}`} target="_blank" rel="noopener">
+                    <span class="app__name">{a.name}</span>
+                    <span class="app__summary">{a.summary}</span>
+                    {a.replaces.length > 0 && <span class="app__instead">instead of {a.replaces.join(', ')}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))
+      }
+    </div>
+
+    <h3 class="sub-head reveal">Also built</h3>
+    <div class="grid grid--3">
       <a class="card card--wide reveal" href={raycast.url} target="_blank" rel="noopener">
         <div class="card__top">
           <h3>{raycast.name}</h3>
@@ -290,6 +330,138 @@ import { pocketHomelab, pocketApps, raycast, sharedTraits, otherRepos } from '..
     font-family: var(--font-mono);
     font-size: 0.82rem;
     color: var(--text);
+  }
+
+  .eco {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .native {
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.88rem;
+  }
+
+  .native li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 0.75rem;
+  }
+
+  .native strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .native__platforms {
+    color: var(--text-faint);
+    font-size: 0.8rem;
+  }
+
+  .suite {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .cat {
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+
+  .cat[open] {
+    border-color: var(--border-strong);
+  }
+
+  .cat summary {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .cat summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cat summary::before {
+    content: '+' / '';
+    color: var(--accent);
+    font-weight: 700;
+    grid-row: 1;
+  }
+
+  .cat[open] summary::before {
+    content: '−' / '';
+  }
+
+  .cat summary:hover .cat__name {
+    color: var(--accent-text);
+  }
+
+  .cat__name {
+    font-weight: 600;
+  }
+
+  .cat__count {
+    font-size: 0.8rem;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    padding: 0 0.45rem;
+    justify-self: start;
+  }
+
+  .cat__desc {
+    grid-column: 2 / -1;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+
+  .apps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .apps a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    height: 100%;
+    padding: 0.9rem 1.25rem;
+    background: var(--bg-elev);
+    color: inherit;
+  }
+
+  .apps a:hover {
+    text-decoration: none;
+    background: var(--bg-soft);
+  }
+
+  .apps a:hover .app__name {
+    color: var(--accent-text);
+  }
+
+  .app__name {
+    font-weight: 600;
+  }
+
+  .app__summary {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+
+  .app__instead {
+    margin-top: auto;
+    padding-top: 0.2rem;
+    color: var(--accent-2);
+    font-size: 0.78rem;
   }
 
   @media (min-width: 900px) {

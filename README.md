@@ -19,6 +19,14 @@ Everything shown on the page lives in `src/data/site.ts`: profile, stats, experi
 
 The portrait is `src/assets/avatar.jpg`.
 
+The Pocket app catalogue (apps, categories, native companions, integration count) is `src/data/pocket.json`, copied from the pockethomelab.com repo. After adding apps there, run:
+
+```bash
+pnpm sync:pocket   # reads ../pocket-homelab-web (override with POCKET_WEB=...)
+```
+
+and commit the updated JSON; Cloudflare builds from the repo, so it cannot read the other checkout.
+
 ## Theme
 
 Terminal look: monospace, phosphor green on near-black. Dark is the default; the header button switches to a light variant and the choice is remembered in `localStorage`. Both palettes are the variable blocks at the top of `src/styles/global.css`.

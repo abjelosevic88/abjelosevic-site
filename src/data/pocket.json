@@ -1,0 +1,958 @@
+{
+  "generated": "2026-11-09",
+  "serviceCount": 55,
+  "categories": [
+    {
+      "id": "platform",
+      "name": "Platform",
+      "description": "The hub every app signs in through, plus the pieces that tie the apps together."
+    },
+    {
+      "id": "media",
+      "name": "Media",
+      "description": "Films, shows, VR videos, music, photos, podcasts, books, retro games and the tools that keep the library tidy."
+    },
+    {
+      "id": "organise",
+      "name": "Notes, files and office",
+      "description": "Notes, voice memos, tasks, calendar, contacts, mail and chat, documents and signatures, files, office documents and your own blog."
+    },
+    {
+      "id": "money",
+      "name": "Money and things",
+      "description": "Your finances and net worth, invoices, shared costs, the homes you rent out, the car, the house, everything you own, want or have on its way, the cards in your wallet and the dates they run out."
+    },
+    {
+      "id": "life",
+      "name": "Everyday life",
+      "description": "Your day, your family, habits, health, training and what you eat, your pets, your clothes, places, maps and trails, the weather, sport with friends, cooking, travel, other languages and learning."
+    },
+    {
+      "id": "work",
+      "name": "Work and code",
+      "description": "Projects, time, clients and deals, forms, tables, a job search, reviews, pull requests, codebases and databases."
+    },
+    {
+      "id": "server",
+      "name": "The server",
+      "description": "Watch the machines, the web pages you care about and the errors in your apps, reach your computers from anywhere, back them up and know what is on the network."
+    }
+  ],
+  "apps": [
+    {
+      "slug": "core",
+      "name": "Pocket Core",
+      "category": "platform",
+      "summary": "The hub of your box: one sign-in for every app, one QR code to set up your phone, and apps that work together.",
+      "replaces": [],
+      "version": "0.36.12",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-core"
+    },
+    {
+      "slug": "hub",
+      "name": "Pocket Hub",
+      "category": "platform",
+      "summary": "A personal home page for your box: your apps, today's tasks and meals, quick capture and widgets in one place.",
+      "replaces": [],
+      "version": "0.6.6",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-hub"
+    },
+    {
+      "slug": "ai",
+      "name": "Pocket AI",
+      "category": "platform",
+      "summary": "Claude Code and Codex on your own server, from any browser or phone, with approvals and scheduled checks.",
+      "replaces": [],
+      "version": "0.87.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-ai"
+    },
+    {
+      "slug": "flows",
+      "name": "Pocket Flows",
+      "category": "platform",
+      "summary": "Automations for your server: when something happens, Flows sends a push, adds a task or calls a web address.",
+      "replaces": [
+        "n8n"
+      ],
+      "version": "0.7.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-flows"
+    },
+    {
+      "slug": "alerts",
+      "name": "Pocket Alerts",
+      "category": "platform",
+      "summary": "One inbox for every alert your server and apps send, with only what matters reaching your phone.",
+      "replaces": [],
+      "version": "0.2.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-alerts"
+    },
+    {
+      "slug": "search",
+      "name": "Pocket Search",
+      "category": "platform",
+      "summary": "Private web search through your own server, with your Pocket apps in the same results.",
+      "replaces": [
+        "SearXNG"
+      ],
+      "version": "0.13.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-search"
+    },
+    {
+      "slug": "watch",
+      "name": "Pocket Watch",
+      "category": "media",
+      "summary": "Films and shows for the whole household on top of Jellyfin, with a watch history, watchlist and requests.",
+      "replaces": [],
+      "version": "0.5.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-watch"
+    },
+    {
+      "slug": "music",
+      "name": "Pocket Music",
+      "category": "media",
+      "summary": "Your music library for the whole household on top of Navidrome, with daily mixes, lyrics and listening stats.",
+      "replaces": [],
+      "version": "0.8.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-music"
+    },
+    {
+      "slug": "photos",
+      "name": "Pocket Photos",
+      "category": "media",
+      "summary": "Your household's photos in one calm, private app on top of the Immich server you already run.",
+      "replaces": [],
+      "version": "0.5.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-photos"
+    },
+    {
+      "slug": "podcasts",
+      "name": "Pocket Podcasts",
+      "category": "media",
+      "summary": "A podcast server that also turns YouTube channels into podcasts, with your place kept on every device.",
+      "replaces": [
+        "PinePods"
+      ],
+      "version": "0.4.5",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-podcasts"
+    },
+    {
+      "slug": "audiobooks",
+      "name": "Pocket Audiobooks",
+      "category": "media",
+      "summary": "An audiobook library and player for the household, with chapters, bookmarks and your place kept everywhere.",
+      "replaces": [
+        "Audiobookshelf"
+      ],
+      "version": "1.6.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-audiobooks"
+    },
+    {
+      "slug": "library",
+      "name": "Pocket Library",
+      "category": "media",
+      "summary": "Every ebook, comic and manga you own in one place, with a browser reader and your place synced to KOReader.",
+      "replaces": [
+        "Calibre-Web",
+        "Kavita"
+      ],
+      "version": "0.10.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-library"
+    },
+    {
+      "slug": "bookshelf",
+      "name": "Pocket Bookshelf",
+      "category": "media",
+      "summary": "A private reading log: what you read, what you thought of it, the lines worth keeping and what to read next.",
+      "replaces": [
+        "Goodreads",
+        "StoryGraph"
+      ],
+      "version": "0.23.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-bookshelf"
+    },
+    {
+      "slug": "reader",
+      "name": "Pocket Reader",
+      "category": "media",
+      "summary": "Your feeds and read-later list in one calm place, with highlights, search and sync to your phone's RSS app.",
+      "replaces": [
+        "FreshRSS",
+        "Karakeep"
+      ],
+      "version": "0.1.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-reader"
+    },
+    {
+      "slug": "radio",
+      "name": "Pocket Radio",
+      "category": "media",
+      "summary": "Internet radio from around the world, plus radio channels made from your own music library.",
+      "replaces": [],
+      "version": "0.1.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-radio"
+    },
+    {
+      "slug": "requests",
+      "name": "Pocket Requests",
+      "category": "media",
+      "summary": "Ask for a film, a show or an album and follow it until it is ready to watch or listen to.",
+      "replaces": [
+        "Jellyseerr"
+      ],
+      "version": "0.9.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-requests"
+    },
+    {
+      "slug": "subtitles",
+      "name": "Pocket Subtitles",
+      "category": "media",
+      "summary": "Keeps your library's subtitles in sync with the audio, automatically, without ever making a file worse.",
+      "replaces": [],
+      "version": "0.6.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-subtitles"
+    },
+    {
+      "slug": "guitar",
+      "name": "Pocket Guitar",
+      "category": "media",
+      "summary": "Your guitar tabs and your practice in one place, with playback, loops, a speed trainer and a practice log.",
+      "replaces": [],
+      "version": "0.6.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-guitar"
+    },
+    {
+      "slug": "notes",
+      "name": "Pocket Notes",
+      "category": "organise",
+      "summary": "Markdown notes kept as plain files where you choose, with search, backlinks, tasks and history.",
+      "replaces": [
+        "Nextcloud Notes"
+      ],
+      "version": "0.11.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-notes"
+    },
+    {
+      "slug": "voice",
+      "name": "Pocket Voice",
+      "category": "organise",
+      "summary": "Voice memos written out on your own server, tidied up by AI, with the tasks, appointments and spending you mentioned one tap from your other apps.",
+      "replaces": [
+        "Wispr Flow"
+      ],
+      "version": "0.7.9",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-voice"
+    },
+    {
+      "slug": "tasks",
+      "name": "Pocket Tasks",
+      "category": "organise",
+      "summary": "Tasks with areas, lists and smart views, synced to Apple Reminders and other apps over CalDAV.",
+      "replaces": [],
+      "version": "0.5.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-tasks"
+    },
+    {
+      "slug": "boards",
+      "name": "Pocket Boards",
+      "category": "organise",
+      "summary": "Trello-style boards, lists and cards for plans, chores and projects, on your own or shared with your household.",
+      "replaces": [
+        "Trello",
+        "Nextcloud Deck"
+      ],
+      "version": "0.1.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-boards"
+    },
+    {
+      "slug": "calendar",
+      "name": "Pocket Calendar",
+      "category": "organise",
+      "summary": "A shared calendar for the household that syncs to every phone and pulls in iCloud, Google and Nextcloud.",
+      "replaces": [],
+      "version": "0.7.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-calendar"
+    },
+    {
+      "slug": "contacts",
+      "name": "Pocket Contacts",
+      "category": "organise",
+      "summary": "Everyone you know in one searchable place, synced to every phone over CardDAV.",
+      "replaces": [],
+      "version": "0.6.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-contacts"
+    },
+    {
+      "slug": "mail",
+      "name": "Pocket Mail",
+      "category": "organise",
+      "summary": "All your email accounts in one calm inbox, with fast search, snooze, send later and undo send.",
+      "replaces": [],
+      "version": "0.3.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-email"
+    },
+    {
+      "slug": "chat",
+      "name": "Pocket Chat",
+      "category": "organise",
+      "summary": "Private chat for your household and friends on your own server: groups, polls, shared to-do lists and cards from your apps, with a catch-up only you see.",
+      "replaces": [
+        "WhatsApp"
+      ],
+      "version": "0.2.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-chat"
+    },
+    {
+      "slug": "documents",
+      "name": "Pocket Documents",
+      "category": "organise",
+      "summary": "Scans and paper files made searchable, tagged and filed for you. A lighter Paperless-ngx replacement.",
+      "replaces": [
+        "Paperless-ngx"
+      ],
+      "version": "0.8.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-documents"
+    },
+    {
+      "slug": "sign",
+      "name": "Pocket Sign",
+      "category": "organise",
+      "summary": "E-signatures on your own server: send a PDF to sign from any phone without an account, or sign one yourself, and get back a sealed PDF with who signed when.",
+      "replaces": [
+        "DocuSign",
+        "Documenso"
+      ],
+      "version": "0.1.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-sign"
+    },
+    {
+      "slug": "files",
+      "name": "Pocket Files",
+      "category": "organise",
+      "summary": "Your files on your own server, with private folders, shares, a WebDAV drive and encrypted links that expire.",
+      "replaces": [],
+      "version": "0.13.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-files"
+    },
+    {
+      "slug": "office",
+      "name": "Pocket Office",
+      "category": "organise",
+      "summary": "Open and edit Word, Excel and PowerPoint files in the browser, wherever they are stored.",
+      "replaces": [],
+      "version": "0.7.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-office"
+    },
+    {
+      "slug": "draw",
+      "name": "Pocket Draw",
+      "category": "organise",
+      "summary": "Sketches, text diagrams and detailed diagrams in one place, with history and search.",
+      "replaces": [],
+      "version": "0.4.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-draw"
+    },
+    {
+      "slug": "clips",
+      "name": "Pocket Clips",
+      "category": "organise",
+      "summary": "Clipboard history, text snippets and search shortcuts on your own server, searchable from every device.",
+      "replaces": [],
+      "version": "0.2.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-clips"
+    },
+    {
+      "slug": "blog",
+      "name": "Pocket Blog",
+      "category": "organise",
+      "summary": "Your own blog without any programming: pick a look, write in an editor that shows the post as it will read, and publish to fast pages with no trackers.",
+      "replaces": [
+        "WordPress",
+        "Ghost"
+      ],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-blog"
+    },
+    {
+      "slug": "money",
+      "name": "Pocket Money",
+      "category": "money",
+      "summary": "Personal finance on your own server: quick entry, any currency, bills, budgets and what is safe to spend.",
+      "replaces": [
+        "Firefly III",
+        "Firefly Pico"
+      ],
+      "version": "0.22.8",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-money"
+    },
+    {
+      "slug": "wealth",
+      "name": "Pocket Wealth",
+      "category": "money",
+      "summary": "Everything you own and owe in one number: accounts, investments with live prices, pension, the flat and the car, minus the mortgage and loans, and how it moves.",
+      "replaces": [
+        "Ghostfolio",
+        "Wealthfolio"
+      ],
+      "version": "0.2.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-wealth"
+    },
+    {
+      "slug": "invoicing",
+      "name": "Pocket Invoicing",
+      "category": "money",
+      "summary": "Invoices, time tracking and payments for freelancers and one-person businesses, on your own server.",
+      "replaces": [
+        "Invoice Ninja"
+      ],
+      "version": "0.14.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-invoicing"
+    },
+    {
+      "slug": "split",
+      "name": "Pocket Split",
+      "category": "money",
+      "summary": "Split costs for trips, flat shares and dinners: who paid what, in any currency, and who owes whom.",
+      "replaces": [
+        "Splitwise",
+        "Spliit"
+      ],
+      "version": "0.7.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-cost-split"
+    },
+    {
+      "slug": "rentals",
+      "name": "Pocket Rentals",
+      "category": "money",
+      "summary": "The homes you rent out in one place: places and units, tenants and leases, rent due, paid and late, deposits, repairs and inspections, and what each place earns.",
+      "replaces": [],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-rentals"
+    },
+    {
+      "slug": "garage",
+      "name": "Pocket Garage",
+      "category": "money",
+      "summary": "Every vehicle on one page: fuel economy, service history, running costs, reminders and documents.",
+      "replaces": [
+        "LubeLogger"
+      ],
+      "version": "0.11.6",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-garage"
+    },
+    {
+      "slug": "home",
+      "name": "Pocket Home",
+      "category": "money",
+      "summary": "Look after your home: appliances, upkeep that reminds you before it is due, repairs and what they cost, and meter readings.",
+      "replaces": [],
+      "version": "0.2.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-home"
+    },
+    {
+      "slug": "renewals",
+      "name": "Pocket Renewals",
+      "category": "money",
+      "summary": "Everything that runs out, in one list: passports, ID cards, insurance, the car's papers, warranties, domains and subscriptions, each with a reminder in time.",
+      "replaces": [],
+      "version": "0.6.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-renewals"
+    },
+    {
+      "slug": "inventory",
+      "name": "Pocket Inventory",
+      "category": "money",
+      "summary": "A home inventory for the household: what you own, how many, where it is and whose it is.",
+      "replaces": [],
+      "version": "0.5.5",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-inventory"
+    },
+    {
+      "slug": "parcels",
+      "name": "Pocket Parcels",
+      "category": "money",
+      "summary": "Every parcel in one place: where it is, when it arrives, a push when it is out for delivery, and the last day to send it back.",
+      "replaces": [],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-parcels"
+    },
+    {
+      "slug": "wallet",
+      "name": "Pocket Wallet",
+      "category": "money",
+      "summary": "Loyalty cards, gift cards, tickets, boarding passes and ID papers on your own server, ready to scan at the till or the gate.",
+      "replaces": [
+        "Stocard",
+        "Catima"
+      ],
+      "version": "0.1.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-wallet"
+    },
+    {
+      "slug": "wishlist",
+      "name": "Pocket Wishlist",
+      "category": "money",
+      "summary": "Wishlists and gift ideas that watch prices and stop the family buying the same present twice.",
+      "replaces": [],
+      "version": "0.4.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-whishlist"
+    },
+    {
+      "slug": "day",
+      "name": "Pocket Day",
+      "category": "life",
+      "summary": "A journal that fills itself in from the other apps on your server, with room for your own words.",
+      "replaces": [],
+      "version": "0.40.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-day"
+    },
+    {
+      "slug": "family",
+      "name": "Pocket Family",
+      "category": "life",
+      "summary": "The whole household in one place: who picks up the children today, the family's week, chores in turns with stars, shared shopping lists and letters from school read for you.",
+      "replaces": [],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-family"
+    },
+    {
+      "slug": "habits",
+      "name": "Pocket Habits",
+      "category": "life",
+      "summary": "A habit tracker based on the one-page bullet-journal spread: a month grid, a few scores and one good thing a day.",
+      "replaces": [],
+      "version": "0.4.7",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-habit-tracker"
+    },
+    {
+      "slug": "health",
+      "name": "Pocket Health",
+      "category": "life",
+      "summary": "Everything your iPhone and watch record about your health, kept on your own server with goals and trends.",
+      "replaces": [],
+      "version": "0.5.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-health"
+    },
+    {
+      "slug": "fitness",
+      "name": "Pocket Fitness",
+      "category": "life",
+      "summary": "Your training log: workouts set by set with a rest timer, routines on a weekly plan, personal records and progress per exercise and muscle.",
+      "replaces": [
+        "Strong",
+        "Hevy"
+      ],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-fitness"
+    },
+    {
+      "slug": "nutrition",
+      "name": "Pocket Nutrition",
+      "category": "life",
+      "summary": "Your food diary: meals with calories, protein, carbs and fat, water, goals worked out for you, barcodes and a meal described in a sentence.",
+      "replaces": [
+        "MyFitnessPal",
+        "Cronometer"
+      ],
+      "version": "0.1.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-nutrition"
+    },
+    {
+      "slug": "pets",
+      "name": "Pocket Pets",
+      "category": "life",
+      "summary": "Look after your pets: each one's papers, vet and food, care that comes back with a reminder, a health log with what it cost, and weight over time.",
+      "replaces": [],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-pets"
+    },
+    {
+      "slug": "wardrobe",
+      "name": "Pocket Wardrobe",
+      "category": "life",
+      "summary": "Your clothes in one place: what goes with what for your style, today's outfit for the weather and your calendar, the laundry, packing, and what is worth buying.",
+      "replaces": [],
+      "version": "0.1.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-wardrobe"
+    },
+    {
+      "slug": "movement",
+      "name": "Pocket Movement",
+      "category": "life",
+      "summary": "Your location history kept at home: where you went, how and how far, and the countries you have visited.",
+      "replaces": [
+        "Dawarich"
+      ],
+      "version": "0.3.5",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-movement"
+    },
+    {
+      "slug": "places",
+      "name": "Pocket Places",
+      "category": "life",
+      "summary": "The places you love and the ones you want to try: restaurants, cafés, bars, museums and viewpoints on a list and a map, with every visit and what it cost.",
+      "replaces": [],
+      "version": "0.1.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-places"
+    },
+    {
+      "slug": "map",
+      "name": "Pocket Map",
+      "category": "life",
+      "summary": "Everything with a place on one map: where you went, your places, trails, trips, photos and payments from your other Pocket apps, each a layer, with your own spots, lines and saved views.",
+      "replaces": [],
+      "version": "0.1.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-map"
+    },
+    {
+      "slug": "trails",
+      "name": "Pocket Trails",
+      "category": "life",
+      "summary": "Plan hikes, walks, runs and rides: routes on a topographic map with the climb and the time, the weather on the day, what to pack, a back-by time that tells someone, and how it went.",
+      "replaces": [
+        "Komoot",
+        "AllTrails"
+      ],
+      "version": "0.1.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-trails"
+    },
+    {
+      "slug": "still",
+      "name": "Pocket Still",
+      "category": "life",
+      "summary": "Guided breathing and meditation on your own server, with a journal that shows what actually calms you.",
+      "replaces": [],
+      "version": "0.1.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-still"
+    },
+    {
+      "slug": "kitchen",
+      "name": "Pocket Kitchen",
+      "category": "life",
+      "summary": "Recipes, a weekly meal plan, the shopping list and the pantry in one place on your own server.",
+      "replaces": [],
+      "version": "0.6.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-kitchen"
+    },
+    {
+      "slug": "travel",
+      "name": "Pocket Travel",
+      "category": "life",
+      "summary": "Plan a trip, track what it really costs, and see where you went and what you photographed, on one page.",
+      "replaces": [
+        "AdventureLog"
+      ],
+      "version": "0.13.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-travel"
+    },
+    {
+      "slug": "translate",
+      "name": "Pocket Translate",
+      "category": "life",
+      "summary": "Translate text, photos, documents and conversations on your own server, with Pocket AI or an offline engine, and keep a phrasebook, a glossary and your history.",
+      "replaces": [
+        "Google Translate",
+        "DeepL"
+      ],
+      "version": "0.1.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-translate"
+    },
+    {
+      "slug": "weather",
+      "name": "Pocket Weather",
+      "category": "life",
+      "summary": "The weather for your places: now, 48 hours and ten days, air and pollen, warnings with your own limits, advice for your plans and a diary of every day.",
+      "replaces": [],
+      "version": "0.3.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-weather"
+    },
+    {
+      "slug": "league",
+      "name": "Pocket League",
+      "category": "life",
+      "summary": "Sport with friends: a group for each sport you play, the next game planned or voted on, who's in with a waiting list, fair teams, and a table with ratings and form.",
+      "replaces": [
+        "Spond",
+        "TeamSnap"
+      ],
+      "version": "0.4.6",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-league"
+    },
+    {
+      "slug": "learn",
+      "name": "Pocket Learn",
+      "category": "life",
+      "summary": "Flashcards with spaced repetition that show each card just before you would forget it.",
+      "replaces": [],
+      "version": "0.2.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-learn"
+    },
+    {
+      "slug": "horoscope",
+      "name": "Pocket Horoscope",
+      "category": "life",
+      "summary": "Birth charts, a daily horoscope and compatibility, worked out from where the planets really are.",
+      "replaces": [],
+      "version": "0.3.5",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-horoscope"
+    },
+    {
+      "slug": "projects",
+      "name": "Pocket Projects",
+      "category": "work",
+      "summary": "Linear-style issues, boards, projects and roadmaps for a household or a small team.",
+      "replaces": [],
+      "version": "0.40.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-projects"
+    },
+    {
+      "slug": "time",
+      "name": "Pocket Time",
+      "category": "work",
+      "summary": "One timer for everything you do, shared by your Pocket apps, with your whole week in one list.",
+      "replaces": [
+        "Toggl",
+        "Clockify",
+        "Kimai"
+      ],
+      "version": "0.1.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-time"
+    },
+    {
+      "slug": "crm",
+      "name": "Pocket CRM",
+      "category": "work",
+      "summary": "Your possible work from the first talk to signed: deals on a board by stage, what each is worth, always a next step, and winning one starts the project and an invoice.",
+      "replaces": [
+        "Pipedrive",
+        "HubSpot"
+      ],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-crm"
+    },
+    {
+      "slug": "forms",
+      "name": "Pocket Forms",
+      "category": "work",
+      "summary": "Forms and surveys anyone can fill in without an account, with one inbox for the answers and one click to turn an answer into a contact, a project, a task or a lead.",
+      "replaces": [
+        "Google Forms",
+        "Typeform",
+        "Tally"
+      ],
+      "version": "0.2.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-forms"
+    },
+    {
+      "slug": "tables",
+      "name": "Pocket Tables",
+      "category": "work",
+      "summary": "Your own small databases without code, like Airtable on your own server: tables with fields that know what they hold, seen as a grid, a board, a calendar or a gallery.",
+      "replaces": [
+        "Airtable"
+      ],
+      "version": "0.2.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-tables"
+    },
+    {
+      "slug": "jobs",
+      "name": "Pocket Jobs",
+      "category": "work",
+      "summary": "Your job search in one place: jobs on a board from saved to hired, postings read from a link, interviews in your calendar, offers side by side and how the search goes.",
+      "replaces": [
+        "Huntr",
+        "Teal"
+      ],
+      "version": "0.1.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-jobs"
+    },
+    {
+      "slug": "review",
+      "name": "Pocket Review",
+      "category": "work",
+      "summary": "Review a PDF together with pinned comments, tracked issues, a strict sign-off and a report of who read what.",
+      "replaces": [],
+      "version": "0.7.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-review"
+    },
+    {
+      "slug": "pr-review",
+      "name": "Pocket PR Review",
+      "category": "work",
+      "summary": "Read a pull request as a story, in the order the change makes sense, with one sentence per file.",
+      "replaces": [],
+      "version": "0.3.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-pr-review"
+    },
+    {
+      "slug": "blueprint",
+      "name": "Pocket Blueprint",
+      "category": "work",
+      "summary": "See how any codebase is built: its structure, who uses what, and every endpoint, table and setting.",
+      "replaces": [],
+      "version": "0.2.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-blueprint"
+    },
+    {
+      "slug": "database",
+      "name": "Pocket Database",
+      "category": "work",
+      "summary": "Browse, query and safely edit every PostgreSQL, MySQL, Redis and SQLite database on your server.",
+      "replaces": [],
+      "version": "0.1.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-database"
+    },
+    {
+      "slug": "monitoring",
+      "name": "Pocket Monitoring",
+      "category": "server",
+      "summary": "Watch your server and other machines live, with a year of history and phone alerts when something goes wrong.",
+      "replaces": [
+        "Beszel",
+        "Speedtest Tracker"
+      ],
+      "version": "0.6.3",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-monitoring"
+    },
+    {
+      "slug": "lookout",
+      "name": "Pocket Lookout",
+      "category": "server",
+      "summary": "Watches web pages for you and says, in one sentence, what changed and whether it matters.",
+      "replaces": [
+        "changedetection.io"
+      ],
+      "version": "0.2.2",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-lookout"
+    },
+    {
+      "slug": "errors",
+      "name": "Pocket Errors",
+      "category": "server",
+      "summary": "Error tracking for your apps and websites on your own server: what broke, where in the code, how often and since which release. Any Sentry SDK sends to it unchanged.",
+      "replaces": [
+        "Sentry"
+      ],
+      "version": "0.1.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-errors"
+    },
+    {
+      "slug": "games",
+      "name": "Pocket Games",
+      "category": "media",
+      "summary": "Your retro game library: play in the browser, saves that follow you, and RomM apps on your handheld.",
+      "replaces": [
+        "RomM"
+      ],
+      "version": "0.2.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-games"
+    },
+    {
+      "slug": "sphere",
+      "name": "Pocket Sphere",
+      "category": "media",
+      "summary": "Your video library with a VR player in the browser, previews, lookups that name your files, and downloads from a link.",
+      "replaces": [
+        "Stash",
+        "MeTube"
+      ],
+      "version": "0.5.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-sphere"
+    },
+    {
+      "slug": "backups",
+      "name": "Pocket Backups",
+      "category": "server",
+      "summary": "Back up the whole server, copy it off-site, and get a plain answer to whether everything is safe.",
+      "replaces": [],
+      "version": "0.3.1",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-backups"
+    },
+    {
+      "slug": "network",
+      "name": "Pocket Network",
+      "category": "server",
+      "summary": "Every device on your home network in one readable list, with alerts when something new joins.",
+      "replaces": [
+        "NetAlertX"
+      ],
+      "version": "0.1.4",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-network"
+    },
+    {
+      "slug": "remote",
+      "name": "Pocket Remote",
+      "category": "server",
+      "summary": "Your own computers from a phone or a browser: a Mac, a Windows PC or a Linux terminal over your tailnet, with Wake-on-LAN, file transfers and a log of every session.",
+      "replaces": [],
+      "version": "0.3.0",
+      "github": "https://github.com/abjelosevic88/pocket-homelab-remote"
+    }
+  ],
+  "native": [
+    {
+      "slug": "launcher",
+      "name": "Pocket Launcher",
+      "platforms": [
+        "Mac"
+      ],
+      "summary": "A Raycast-style launcher for the Mac: your apps, every Pocket app, Pocket AI, tasks, money and dictation behind one shortcut."
+    },
+    {
+      "slug": "studio",
+      "name": "Pocket Studio",
+      "platforms": [
+        "Mac"
+      ],
+      "summary": "A small DAW for the Mac: record, edit and mix, then play along with the tabs in Pocket Guitar."
+    },
+    {
+      "slug": "files",
+      "name": "Pocket Files for iPhone and Mac",
+      "platforms": [
+        "Mac",
+        "iPhone"
+      ],
+      "summary": "Your server's files in Finder and in the Files app, through Apple's File Provider. The Nextcloud client replacement."
+    },
+    {
+      "slug": "ai",
+      "name": "Pocket AI for iPhone",
+      "platforms": [
+        "iPhone"
+      ],
+      "summary": "Claude Code and Codex on your server, from your phone: live threads, approvals, forks, worktrees and schedules."
+    },
+    {
+      "slug": "voice",
+      "name": "Pocket Voice for iPhone",
+      "platforms": [
+        "iPhone"
+      ],
+      "summary": "A recorder that never loses a memo: record on the phone, your server writes it out and finds the tasks, events and spending."
+    },
+    {
+      "slug": "bookshelf",
+      "name": "Pocket Bookshelf for iPhone",
+      "platforms": [
+        "iPhone"
+      ],
+      "summary": "What you are reading and where you are in it, your library, thoughts and quotes, and a Pocket AI chat for every book."
+    },
+    {
+      "slug": "remote",
+      "name": "Pocket Remote for iPhone",
+      "platforms": [
+        "iPhone"
+      ],
+      "summary": "Your Mac's screen, a Windows PC or a Linux terminal over your tailnet, from the phone, with a real keyboard around it."
+    },
+    {
+      "slug": "sphere",
+      "name": "Pocket Sphere for iPhone",
+      "platforms": [
+        "iPhone"
+      ],
+      "summary": "Your video library on the phone, and VR videos on a flat screen: look around, one eye, or a phone headset."
+    }
+  ]
+}
