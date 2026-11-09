@@ -15,9 +15,7 @@ pnpm preview
 
 ## Edit content
 
-Everything shown on the page lives in `src/data/site.ts`: profile, stats, experience, skills, the Pocket Homelab section, the native companion apps, education.
-
-Native app screenshots live in `src/assets/native/` (PNG; Astro turns them into responsive WebP). Each app in `nativeApps` names its shots by file name. Components in `src/components/` only render that data.
+Everything shown on the page lives in `src/data/site.ts`: profile, stats, experience, skills, the Pocket Homelab section, education. Components in `src/components/` only render that data.
 
 The portrait is `src/assets/avatar.jpg`.
 
