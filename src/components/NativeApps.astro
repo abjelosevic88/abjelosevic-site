@@ -1,0 +1,353 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icons from './Icons.astro';
+import { nativeApps } from '../data/site';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/native/*.png', { eager: true });
+const shot = (name: string) => {
+  const img = files[`../assets/native/${name}.png`];
+  if (!img) throw new Error(`Missing screenshot src/assets/native/${name}.png`);
+  return img.default;
+};
+
+const groups = [
+  {
+    title: 'On the Mac',
+    lede: 'Menu bar, Finder and the keyboard: the places a Mac app can reach and a web page cannot.',
+    apps: nativeApps.filter((a) => a.platforms.some((p) => p.startsWith('macOS'))),
+  },
+  {
+    title: 'On the iPhone',
+    lede: 'The phone’s own keyboard, camera, Lock Screen, Share sheet and background uploads, over the same API as the web app.',
+    apps: nativeApps.filter((a) => !a.platforms.some((p) => p.startsWith('macOS'))),
+  },
+];
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+
+<section class="section" id="native-apps" aria-labelledby="native-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Companion apps</span>
+      <h2 id="native-title">Native apps for the Pocket servers</h2>
+      <p>
+        Every Pocket app is a web app first. Where the browser runs out (Finder, a global shortcut, the microphone with
+        the screen locked, a remote desktop with a real keyboard) there is a native Swift companion that talks to the
+        same server.
+      </p>
+    </div>
+
+    <ul class="principles reveal" aria-label="What the native apps share">
+      <li><strong>Same API as the web.</strong> No separate backend; each app is a client of its self-hosted server.</li>
+      <li><strong>Sign in on the server’s own page.</strong> Pocket Core or passkeys, traded for a per-device token kept in the Keychain and revoked on sign-out.</li>
+      <li><strong>Small and strict.</strong> SwiftUI, Swift 6 concurrency, a tested Kit package per app, almost no third-party code.</li>
+    </ul>
+
+    {
+      groups.map((g) => (
+        <div class="group">
+          <h3 class="sub-head reveal">{g.title}</h3>
+          <p class="sub-lede reveal">{g.lede}</p>
+
+          <div class="apps">
+            {g.apps.map((app) => {
+              const mac = app.shots.filter((s) => s.kind === 'mac');
+              const phone = app.shots.filter((s) => s.kind === 'phone');
+              return (
+                <article class="app reveal" id={`app-${slug(app.name)}`}>
+                  <div class="app__body">
+                    <div class="app__head">
+                      <h4>{app.name}</h4>
+                      <div class="app__platforms">
+                        {app.platforms.map((p) => (
+                          <span class="chip chip--accent">{p}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <p class="app__summary">{app.summary}</p>
+                    <p class="app__detail">{app.detail}</p>
+                    <ul class="app__features">
+                      {app.features.map((f) => (
+                        <li>{f}</li>
+                      ))}
+                    </ul>
+                    <p class="app__pairs">
+                      <span class="app__pairs-label">Companion to</span>
+                      {app.pairsWith.map((s) => (
+                        <a href={s.url} target="_blank" rel="noopener">
+                          <Icons name="github" />
+                          {s.name}
+                        </a>
+                      ))}
+                    </p>
+                    <div class="tags">
+                      {app.tags.map((t) => (
+                        <span class="chip">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div class:list={['app__shots', { 'app__shots--mixed': mac.length > 0 && phone.length > 0 }]}>
+                    {mac.length > 0 && (
+                      <div class="shots-mac">
+                        {mac.map((s) => (
+                          <figure class="shot shot--mac">
+                            <Image
+                              src={shot(s.file)}
+                              alt={s.alt}
+                              widths={[480, 800, 1200, 1600]}
+                              sizes="(min-width: 1000px) 640px, 100vw"
+                              loading="lazy"
+                            />
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                    {phone.length > 0 && (
+                      <div class="shots-phone">
+                        {phone.map((s) => (
+                          <figure class="shot shot--phone">
+                            <Image
+                              src={shot(s.file)}
+                              alt={s.alt}
+                              widths={[240, 360, 480, 660]}
+                              sizes="(min-width: 1000px) 210px, 33vw"
+                              loading="lazy"
+                            />
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      ))
+    }
+
+    <p class="note reveal">
+      Screenshots are from the apps running on my Mac and in the iOS Simulator; the iPhone ones use each server’s demo
+      data.
+    </p>
+  </div>
+</section>
+
+<style>
+  .principles {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    padding: 1.25rem 1.4rem;
+    border: 1px dashed var(--border-strong);
+    background: var(--bg-soft);
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  .principles li {
+    position: relative;
+    padding-left: 1.3rem;
+  }
+
+  .principles li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  .principles strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .group + .group {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .sub-head {
+    font-size: 1.35rem;
+  }
+
+  .sub-head::before {
+    content: '# ' / '';
+    color: var(--text-faint);
+  }
+
+  .sub-lede {
+    margin: 0.4rem 0 1.4rem;
+    color: var(--text-muted);
+  }
+
+  .apps {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .app {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    scroll-margin-top: 84px;
+  }
+
+  .app__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-width: 0;
+  }
+
+  .app__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .app__head h4 {
+    font-size: 1.3rem;
+  }
+
+  .app__head h4::before {
+    content: '## ' / '';
+    color: var(--text-faint);
+  }
+
+  .app__platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .app__summary {
+    color: var(--text);
+    font-weight: 550;
+  }
+
+  .app__detail {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .app__features {
+    display: grid;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .app__features li {
+    position: relative;
+    padding-left: 1.2rem;
+  }
+
+  .app__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+  }
+
+  .app__pairs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .app__pairs-label {
+    color: var(--text-faint);
+  }
+
+  .app__pairs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .app__pairs :global(svg) {
+    width: 14px;
+    height: 14px;
+  }
+
+  .app__shots {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .shots-mac {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .shots-phone {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 680px;
+  }
+
+  .shots-phone:has(> :only-child) {
+    grid-template-columns: minmax(0, 240px);
+  }
+
+  .shot {
+    margin: 0;
+  }
+
+  .shot :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .shot--mac :global(img) {
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+  }
+
+  .shot--phone :global(img) {
+    border-radius: 18px;
+    border: 1px solid var(--border-strong);
+    background: #000;
+  }
+
+  /* One Mac window beside one phone (Pocket Files). */
+  .app__shots--mixed {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .app__shots--mixed .shots-phone {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .note {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--border);
+    color: var(--text-faint);
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 1000px) {
+    .app {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      align-items: start;
+    }
+  }
+</style>
